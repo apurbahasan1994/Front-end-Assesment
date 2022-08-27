@@ -32,9 +32,6 @@ Live demo of the project can be found here https://idyllic-kulfi-10fe5b.netlify.
 ### Clone the repo
 
 
-
-Create a directory with your desired name and clone it there.
-
 ```shell
 git clone https://github.com/apurbahasan1994/Front-end-Assesment.git
 ```
@@ -45,6 +42,7 @@ git clone https://github.com/apurbahasan1994/Front-end-Assesment.git
 Install all the despendencies described in the `package.json` and verify that it works:
 
 ```shell
+cd Front-end-Assesment/
 npm install
 ng serve
 ```
