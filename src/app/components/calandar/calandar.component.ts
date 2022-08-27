@@ -71,16 +71,8 @@ export class CalandarComponent implements OnInit {
             //gettinf the month value off the appoinment
             const month = this.monthNames[appoinment.date.getMonth()];
             //checking if in localstorage we have value stored with the month name
-            const persistedDates = localStorage.getItem(month);
-            if (persistedDates) {
-              //if we have value for this month we need to delete it and update with our current updated state calendar list
-              localStorage.removeItem(month);
-              localStorage.setItem(month, JSON.stringify(this.calendar));
-            }
-            else {
-              localStorage.setItem(month, JSON.stringify(this.calendar));
-            }
-            this.openSnackBar("Successfull","Ok");
+            this.setAndResetLocalStorage(month,this.calendar);
+            this.openSnackBar("Successfull", "Ok");
           }
 
         });
@@ -93,7 +85,7 @@ export class CalandarComponent implements OnInit {
     });
   }
   openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action,{
+    this._snackBar.open(message, action, {
       duration: 4000,
       panelClass: ['snackBar']
     });
@@ -106,16 +98,12 @@ export class CalandarComponent implements OnInit {
   }
 
   addToLocalStorage(monthIndex: number, appoinment: AppoinmentModel) {
-    let calendar: CalendarDay[] = [];
     let day: Date = new Date(new Date().setMonth(monthIndex));
     const month = this.monthNames[day.getMonth()];
     const persistedDates = localStorage.getItem(month);
     let startingDateOfCalendar = new Date(day.setDate(1));
     let dateToAdd = startingDateOfCalendar;
-    for (var i = 0; i < 35; i++) {
-      calendar.push(new CalendarDay(new Date(dateToAdd)));
-      dateToAdd = new Date(dateToAdd.setDate(dateToAdd.getDate() + 1));
-    }
+    let calendar: CalendarDay[] = this.createDays(dateToAdd);
     const filteredDates = calendar.filter((day) => day.date.setHours(0, 0, 0, 0) === appoinment.date.setHours(0, 0, 0, 0));
     if (filteredDates.length > 0) {
       let day: Date = new Date(new Date().setMonth(this.monthIndex));
@@ -129,14 +117,7 @@ export class CalandarComponent implements OnInit {
             newDay.appointMents = [...calendar[idx].appointMents];
             calendar[idx] = newDay;
             const month = this.monthNames[appoinment.date.getMonth()];
-            const persistedDates = localStorage.getItem(month);
-            if (persistedDates) {
-              localStorage.removeItem(month);
-              localStorage.setItem(month, JSON.stringify(calendar));
-            }
-            else {
-              localStorage.setItem(month, JSON.stringify(calendar));
-            }
+            this.setAndResetLocalStorage(month, calendar);
             return;
           }
           const newDay = new CalendarDay(calendar[idx].date);
@@ -144,15 +125,8 @@ export class CalandarComponent implements OnInit {
           newDay.appointMents.push(appoinment);
           calendar[idx] = newDay;
           const month = this.monthNames[appoinment.date.getMonth()];
-          const persistedDates = localStorage.getItem(month);
-          if (persistedDates) {
-            localStorage.removeItem(month);
-            localStorage.setItem(month, JSON.stringify(calendar));
-          }
-          else {
-            localStorage.setItem(month, JSON.stringify(calendar));
-          }
-          this.openSnackBar("Successfull","Ok");
+          this.setAndResetLocalStorage(month, calendar);
+          this.openSnackBar("Successfull", "Ok");
         }
 
       });
@@ -162,29 +136,46 @@ export class CalandarComponent implements OnInit {
   private generateCalendarDays(monthIndex: number): void {
     // we reset our calendar
     this.calendar = [];
-
     // we set the date
     let day: Date = new Date(new Date().setMonth(monthIndex));
-
     // set the dispaly month for UI
     this.displayMonth = this.monthNames[day.getMonth()];
-    const persistedDates = localStorage.getItem(this.displayMonth);
+    if (this.checkingPersitanceStorageWithMonthKey(this.displayMonth)) {
+      return;
+    }
+    let startingDateOfCalendar = new Date(day.setDate(1));
+    let dateToAdd = startingDateOfCalendar;
+    this.calendar = this.createDays(dateToAdd);
+    localStorage.setItem(this.displayMonth, JSON.stringify(this.calendar));
+  }
+  setAndResetLocalStorage(month: string, calendar: CalendarDay[]) {
+    const persistedDates = localStorage.getItem(month);
+    if (persistedDates) {
+      localStorage.removeItem(month);
+      localStorage.setItem(month, JSON.stringify(calendar));
+    }
+    else {
+      localStorage.setItem(month, JSON.stringify(calendar));
+    }
+
+  }
+  checkingPersitanceStorageWithMonthKey(displayMonth: string): boolean {
+    const persistedDates = localStorage.getItem(displayMonth);
     if (persistedDates) {
       this.calendar = JSON.parse(persistedDates);
       this.calendar = this.calendar.map((date) => { return ({ ...date, date: new Date(date.date) } as CalendarDay) });
-      // localStorage.removeItem(this.displayMonth);
-      return;
+      return true;
     }
+    return false;
+  }
 
-    let startingDateOfCalendar = new Date(day.setDate(1));
-
-    let dateToAdd = startingDateOfCalendar;
-
-    for (var i = 0; i < 35; i++) {
-      this.calendar.push(new CalendarDay(new Date(dateToAdd)));
+  createDays(dateToAdd: Date): CalendarDay[] {
+    let calandar: CalendarDay[] = [];
+    for (let i = 0; i < 35; i++) {
+      calandar.push(new CalendarDay(new Date(dateToAdd)));
       dateToAdd = new Date(dateToAdd.setDate(dateToAdd.getDate() + 1));
     }
-    localStorage.setItem(this.displayMonth, JSON.stringify(this.calendar));
+    return calandar;
   }
 
   openAppoinmentModal(appoinment: AppoinmentModel, index: number) {
