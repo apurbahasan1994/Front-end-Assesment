@@ -24,6 +24,9 @@ Live demo of the project can be found here [Live link](https://idyllic-kulfi-10f
 ### Styling 
 * For styling Scss and Angualar Material is used.
 
+### Storind Data
+ * For storing app data browsers localstorage have been used in this project
+
 ## Get started
 
 ### Clone the repo
