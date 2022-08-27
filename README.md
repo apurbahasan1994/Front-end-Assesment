@@ -3,7 +3,7 @@
 
 ![intro](images/image.png)
 
-Live demo of the project can be found here [Live link](https://idyllic-kulfi-10fe5b.netlify.ap)
+Live demo of the project can be found here https://idyllic-kulfi-10fe5b.netlify.app/
 
 ## Angular version
  * This project is created with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.2.
