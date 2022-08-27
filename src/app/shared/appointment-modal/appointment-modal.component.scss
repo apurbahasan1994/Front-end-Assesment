@@ -1,9 +1,8 @@
-:host{
-
-  ::ng-deep .example-full-width .mat-form-field-infix{
+:host {
+  ::ng-deep .example-full-width .mat-form-field-infix {
     font-size: 1.4rem;
   }
-  ::ng-deep .example-full-width .mat-error{
+  ::ng-deep .example-full-width .mat-error {
     font-size: 1.2rem;
   }
 }
@@ -12,7 +11,7 @@
 }
 
 .modal__body {
-  padding: 40px 0px  15px 0px;
+  padding: 40px 0px 15px 0px;
 }
 
 .example-form {
@@ -39,15 +38,14 @@
   justify-content: flex-end;
   gap: 20px;
 }
-@media(max-width:500px){
-  .date__inputs{
+@media (max-width: 500px) {
+  .date__inputs {
     flex-direction: column;
     gap: 0px;
   }
-  .modal__body{
-    max-height:50vh;
+  .modal__body {
+    max-height: 50vh;
     overflow-y: scroll;
-
   }
   .input__row {
     display: flex;

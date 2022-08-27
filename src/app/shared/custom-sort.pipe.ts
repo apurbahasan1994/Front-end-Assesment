@@ -8,13 +8,20 @@ export class CustomSortPipe implements PipeTransform {
   transform(appoinmentArray: AppoinmentModel[]): AppoinmentModel[] {
     const newSoretdAppoinments = [
       ...appoinmentArray.sort((a, b) => {
+        const dateTimeA = moment(
+          new Date(
+            moment(a.date, 'MM-DD-YYYY').toDate().toDateString() + ' ' + a.time
+          )
+        );
+        const dateTimeB = moment(
+          new Date(
+            moment(b.date, 'MM-DD-YYYY').toDate().toDateString() + ' ' + b.time
+          )
+        );
 
-        const dateTimeA = moment(new Date((moment(a.date,'MM-DD-YYYY').toDate().toDateString() + ' ' + a.time)));
-        const dateTimeB = moment(new Date(moment(b.date,'MM-DD-YYYY').toDate().toDateString() + ' ' + b.time));
-
-        const valueOfA=moment(dateTimeA).valueOf();
-        const valueOfB=moment(dateTimeB).valueOf();
-        return valueOfA-valueOfB;
+        const valueOfA = moment(dateTimeA).valueOf();
+        const valueOfB = moment(dateTimeB).valueOf();
+        return valueOfA - valueOfB;
       }),
     ];
 

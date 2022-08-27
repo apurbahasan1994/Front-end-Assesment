@@ -4,7 +4,7 @@ import { AppoinmentModel } from './Utils/appoinmentModel';
 export interface SubjectModel {
   appoinment: AppoinmentModel;
   method?: string;
-  index?:number
+  index?: number;
 }
 
 @Injectable({
@@ -20,23 +20,28 @@ export class AppoinmentService {
       time: new Date('1/1/1000').toString(),
       age: 0,
       gender: '',
-    }
+    },
   };
-  selectedMonth:Date=new Date();
-  newSelectedMonth:BehaviorSubject<Date>=new BehaviorSubject<Date>(this.selectedMonth);
+  selectedMonth: Date = new Date();
+  newSelectedMonth: BehaviorSubject<Date> = new BehaviorSubject<Date>(
+    this.selectedMonth
+  );
   newsubjectObject: BehaviorSubject<SubjectModel> =
     new BehaviorSubject<SubjectModel>(this.subjectObject);
-  constructor() { }
+  constructor() {}
   getAppoinment() {
     return this.newsubjectObject.asObservable();
   }
   setAppoinment(subjectObject: SubjectModel) {
-    this.newsubjectObject.next({ ...subjectObject, appoinment: { ...subjectObject.appoinment } });
+    this.newsubjectObject.next({
+      ...subjectObject,
+      appoinment: { ...subjectObject.appoinment },
+    });
   }
-  getSelectedMonth(){
+  getSelectedMonth() {
     return this.newSelectedMonth.asObservable();
   }
-  setSelectedMonth(date:Date){
+  setSelectedMonth(date: Date) {
     this.newSelectedMonth.next(date);
   }
 }

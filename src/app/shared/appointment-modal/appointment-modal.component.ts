@@ -4,7 +4,12 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
-import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
+import {
+  FormControl,
+  Validators,
+  FormGroup,
+  FormBuilder,
+} from '@angular/forms';
 import {
   MomentDateAdapter,
   MAT_MOMENT_DATE_ADAPTER_OPTIONS,
@@ -53,9 +58,7 @@ export class AppointmentModalComponent implements OnInit {
   selectedValue: string = '';
   selectedCar: string = '';
   date = new FormControl(moment());
-  genders: string[] = [
-    "Male", "Female", "Others"
-  ];
+  genders: string[] = ['Male', 'Female', 'Others'];
   hasNumberError: boolean = false;
   genderValue = { value: 'male', viewValue: 'Male' };
   today: Date = new Date();
@@ -66,20 +69,22 @@ export class AppointmentModalComponent implements OnInit {
     private _apponmentService: AppoinmentService,
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-    this.maxDate = new Date(this.today.getFullYear(), this.today.getMonth() + 1, 0);
+    this.maxDate = new Date(
+      this.today.getFullYear(),
+      this.today.getMonth() + 1,
+      0
+    );
     this.appoinmentForm = this.createFrom();
-    this._apponmentService.getSelectedMonth().subscribe(date => {
+    this._apponmentService.getSelectedMonth().subscribe((date) => {
       if (!this.data?.appoinment) {
         this.control.dateFormControl.setValue(date);
         this.control.dateFormControl.updateValueAndValidity();
       }
     });
-
   }
-
 
   createFrom(): FormGroup {
     return new FormGroup({
@@ -95,13 +100,17 @@ export class AppointmentModalComponent implements OnInit {
         this.data?.appoinment?.lastName ?? '',
         [Validators.required, Validators.maxLength(40)]
       ),
-      genderFormControl: new FormControl(this.data?.appoinment?.gender ?? this.genders[0]),
+      genderFormControl: new FormControl(
+        this.data?.appoinment?.gender ?? this.genders[0]
+      ),
       ageFormControl: new FormControl(this.data?.appoinment?.age ?? 0, [
         Validators.min(0),
-        Validators.pattern(/^-?(0|[1-9]\d*)?$/)
+        Validators.pattern(/^-?(0|[1-9]\d*)?$/),
       ]),
       dateFormControl: new FormControl(
-        this.data?.appoinment?.date ? new Date(this.data?.appoinment?.date) : new Date()
+        this.data?.appoinment?.date
+          ? new Date(this.data?.appoinment?.date)
+          : new Date()
       ),
       timeFormControl: new FormControl(this.data?.appoinment?.time ?? null, [
         Validators.required,
@@ -109,7 +118,7 @@ export class AppointmentModalComponent implements OnInit {
     });
   }
   onSubmitForm() {
-    if (!(/^-?([1-9]\d*)?$/.test(this.appoinmentForm.value.ageFormControl))) {
+    if (!/^-?([1-9]\d*)?$/.test(this.appoinmentForm.value.ageFormControl)) {
       this.control.ageFormControl.setErrors('pattern', true);
       this.hasNumberError = true;
       this.appoinmentForm.markAllAsTouched();
@@ -123,16 +132,21 @@ export class AppointmentModalComponent implements OnInit {
         email: this.control.emailFormControl.value,
         age: +this.control.ageFormControl.value,
         gender: this.control.genderFormControl.value,
-        date: this.control.dateFormControl.value instanceof Date ? this.control.dateFormControl.value : new Date(this.control.dateFormControl.value),
+        date:
+          this.control.dateFormControl.value instanceof Date
+            ? this.control.dateFormControl.value
+            : new Date(this.control.dateFormControl.value),
         time: this.control.timeFormControl.value,
       };
-      this._apponmentService.setAppoinment({ appoinment: newAppoinment, method: this.data?.appoinment ? 'update' : "add", index: this.data?.appoinment ? this.data?.index : -1 });
+      this._apponmentService.setAppoinment({
+        appoinment: newAppoinment,
+        method: this.data?.appoinment ? 'update' : 'add',
+        index: this.data?.appoinment ? this.data?.index : -1,
+      });
       this.dialogRef.close();
-    }
-    else {
+    } else {
       this.appoinmentForm.markAllAsTouched();
     }
-
   }
   get control(): any {
     return this.appoinmentForm.controls;
@@ -141,5 +155,5 @@ export class AppointmentModalComponent implements OnInit {
 export interface DialogData {
   appoinment?: AppoinmentModel;
   fromEdit?: boolean;
-  index?: number
+  index?: number;
 }

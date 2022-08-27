@@ -4,9 +4,9 @@
       {{ data?.fromEdit ? "Update Appointment" : "Book Appointment" }}
     </h2>
   </div>
-  <mat-divider style="margin-top: 20px;"></mat-divider>
+  <mat-divider style="margin-top: 20px"></mat-divider>
   <div class="modal__body">
-    <form class="example-form" [formGroup]="appoinmentForm"  #ff="ngForm">
+    <form class="example-form" [formGroup]="appoinmentForm" #ff="ngForm">
       <div class="input__row">
         <mat-form-field class="example-full-width" appearance="fill">
           <mat-label>First name</mat-label>
@@ -77,9 +77,7 @@
             formControlName="ageFormControl"
           />
           <mat-error
-            *ngIf="
-            control.ageFormControl.hasError('pattern')||hasNumberError
-            "
+            *ngIf="control.ageFormControl.hasError('pattern') || hasNumberError"
             >Only numeric value is accepted( must be greater than 0)</mat-error
           >
         </mat-form-field>
@@ -92,7 +90,6 @@
             [matDatepicker]="dp"
             formControlName="dateFormControl"
             [min]="today"
-
           />
           <mat-error *ngIf="control.dateFormControl.hasError('required')">
             Please enter a valid date
@@ -119,7 +116,7 @@
   <footer class="modal__footer">
     <button mat-stroked-button (click)="dialogRef.close()">Close</button>
     <button mat-raised-button color="primary" (click)="onSubmitForm()">
-      {{data?.fromEdit?'Update':'Create'}}
+      {{ data?.fromEdit ? "Update" : "Create" }}
     </button>
   </footer>
 </div>

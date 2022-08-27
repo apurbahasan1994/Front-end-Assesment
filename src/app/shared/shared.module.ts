@@ -14,11 +14,7 @@ import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
 import { ChunkPipe } from './chunk.pipe';
 import { CustomSortPipe } from './custom-sort.pipe';
 @NgModule({
-  declarations: [
-    AppointmentModalComponent,
-    ChunkPipe,
-    CustomSortPipe
-  ],
+  declarations: [AppointmentModalComponent, ChunkPipe, CustomSortPipe],
   imports: [
     CommonModule,
     MatDialogModule,
@@ -31,7 +27,8 @@ import { CustomSortPipe } from './custom-sort.pipe';
     MatSelectModule,
     MatDatepickerModule,
     MatDividerModule,
-    NgxMatTimepickerModule
-  ], exports: [ChunkPipe,CustomSortPipe]
+    NgxMatTimepickerModule,
+  ],
+  exports: [ChunkPipe, CustomSortPipe],
 })
-export class SharedModule { }
+export class SharedModule {}

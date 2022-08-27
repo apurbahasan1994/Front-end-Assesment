@@ -4,11 +4,11 @@
   max-width: 100%;
   background-color: #fff;
 }
-.calander__conatainer{
-   border: 1px solid #dee2e6;
-   border-radius: 10px;
-   overflow: hidden;
-   font-size: 1.4rem;
+.calander__conatainer {
+  border: 1px solid #dee2e6;
+  border-radius: 10px;
+  overflow: hidden;
+  font-size: 1.4rem;
 }
 .calendar-table thead th {
   vertical-align: bottom;
@@ -20,16 +20,16 @@
 .calendar-table td,
 .calendar-table th {
   border-top: 1px solid #dee2e6;
-  border-right: 1px solid #dee2e6;;
+  border-right: 1px solid #dee2e6;
 }
 
 .calendar-table td,
 .calendar-table th {
-  padding:0px .2rem;
+  padding: 0px 0.2rem;
   vertical-align: top;
   // border-top: 1px solid #dee2e6;
 }
-.calendar-table th{
+.calendar-table th {
   padding-top: 2rem;
   padding-bottom: 2rem;
 }
@@ -40,7 +40,7 @@
   cursor: pointer;
 }
 
-.calendar-day>div {
+.calendar-day > div {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -68,7 +68,7 @@
 .blue-date {
   color: rgb(16, 110, 190);
 }
-.appoinment__list{
+.appoinment__list {
   max-height: 50px;
   overflow-y: scroll;
   display: flex;
@@ -79,8 +79,8 @@
   list-style: none;
 }
 
-@media(max-width:800px){
-  .calander__conatainer{
+@media (max-width: 800px) {
+  .calander__conatainer {
     overflow-x: scroll;
   }
 }
