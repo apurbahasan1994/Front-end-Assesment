@@ -1,27 +1,53 @@
-# Assesment
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.2.
+# A Doctors Appointment App in Angular
 
-## Development server
+![intro](images/image.png)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Live demo of the project can be found here [Live link](https://idyllic-kulfi-10fe5b.netlify.ap)
 
-## Code scaffolding
+## Angular version
+ * This project is created with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.2.
+## Other Packages
+* [Angular Material](https://material.angular.io/)
+* [Angular Material Timepicker](https://tonysamperi.github.io/ngx-mat-timepicker/)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+## A short brief
+### Modules
+* Components : For storing all the componets of the project
+* Shared :     For storing the reusable components, custom pipes pipes
+* Utils :      For storing the models and utility functions
+
+### Services
+ * AppoinmentService have been used for sharing data to multiple componets.
+
+### Styling 
+* For styling Scss and Angualar Material is used.
+
+## Get started
+
+### Clone the repo
+
+
+
+Create a directory with your desired name and clone it there.
+
+```shell
+git clone https://github.com/apurbahasan1994/Front-end-Assesment.git
+```
+
+### Install npm packages and start the dev server
+
+
+Install all the despendencies described in the `package.json` and verify that it works:
+
+```shell
+npm install
+ng serve
+```
+Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+
+# Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
