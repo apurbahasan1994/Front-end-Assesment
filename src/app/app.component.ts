@@ -13,7 +13,6 @@ export class AppComponent {
   }
   ngOnInit() {
     const month=new Date().getMonth()+1;
-    console.log(month);
     this._router.navigate([`month/${month}`]);
   }
 }
