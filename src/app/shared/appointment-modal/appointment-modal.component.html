@@ -1,0 +1,125 @@
+<div class="modal">
+  <div class="modal__header">
+    <h2 class="label">
+      {{ data?.fromEdit ? "Update Appointment" : "Book Appointment" }}
+    </h2>
+  </div>
+  <mat-divider style="margin-top: 20px;"></mat-divider>
+  <div class="modal__body">
+    <form class="example-form" [formGroup]="appoinmentForm"  #ff="ngForm">
+      <div class="input__row">
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>First name</mat-label>
+          <input matInput formControlName="firstNameFormControl" />
+          <mat-error
+            *ngIf="
+              control.firstNameFormControl.hasError('required') &&
+              !control.firstNameFormControl.hasError('maxLenght')
+            "
+          >
+            First name is required (must be less than 40 chracters)
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="input__row">
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Last name</mat-label>
+          <input matInput formControlName="lastNameFormControl" />
+          <mat-error
+            *ngIf="
+              control.lastNameFormControl.hasError('required') &&
+              !control.lastNameFormControl.hasError('maxLenght')
+            "
+          >
+            Last name is required (must be less than 40 chracters)
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="input__row">
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Email</mat-label>
+          <input
+            type="email"
+            matInput
+            formControlName="emailFormControl"
+            placeholder="Ex. pat@example.com"
+          />
+          <mat-error
+            *ngIf="
+              control.emailFormControl.hasError('email') &&
+              !control.emailFormControl.hasError('required')
+            "
+          >
+            Please enter a valid email address
+          </mat-error>
+          <mat-error *ngIf="control.emailFormControl.hasError('required')">
+            Email is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="input__row">
+        <mat-form-field appearance="fill" class="example-full-width">
+          <mat-label>Gender</mat-label>
+          <mat-select name="gender" formControlName="genderFormControl">
+            <mat-option *ngFor="let gender of genders" [value]="gender">
+              {{ gender }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="input__row">
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Age</mat-label>
+          <input
+            matInput
+            type="number"
+            min="0"
+            formControlName="ageFormControl"
+          />
+          <mat-error
+            *ngIf="
+            control.ageFormControl.hasError('pattern')||hasNumberError
+            "
+            >Only numeric value input is accepted(greater than 0)</mat-error
+          >
+        </mat-form-field>
+      </div>
+      <div class="input__row date__inputs">
+        <mat-form-field appearance="fill" class="example-full-width">
+          <mat-label>Date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="dp"
+            formControlName="dateFormControl"
+            [min]="today"
+
+          />
+          <mat-error *ngIf="control.dateFormControl.hasError('required')">
+            Please enter a valid date
+          </mat-error>
+          <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+          <mat-datepicker #dp></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Time</mat-label>
+          <input
+            matInput
+            [ngxMatTimepicker]="picker"
+            formControlName="timeFormControl"
+            (keydown)="picker.open()"
+          />
+          <mat-error *ngIf="control.timeFormControl.hasError('required')">
+            Please select time
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <ngx-mat-timepicker #picker></ngx-mat-timepicker>
+    </form>
+  </div>
+  <footer class="modal__footer">
+    <button mat-stroked-button (click)="dialogRef.close()">Close</button>
+    <button mat-raised-button color="primary" (click)="onSubmitForm()">
+      {{data?.fromEdit?'Update':'Create'}}
+    </button>
+  </footer>
+</div>

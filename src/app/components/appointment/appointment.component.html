@@ -1,0 +1,14 @@
+<div class="appointmemt">
+  <div class="appoinment__header">
+    <button mat-stroked-button [matMenuTriggerFor]="menu"><span>{{currentMonth}}</span> <mat-icon style="margin-left: 20px;">keyboard_arrow_down</mat-icon></button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item *ngFor="let month of months;let i=index" (click)="onMonthChage(month,i)">{{month}}</button>
+    </mat-menu>
+
+    <button mat-raised-button color="primary" (click)="openDialog()">Create Appointment</button>
+  </div>
+  <div style="width: 100%;">
+    <app-calandar [monthNames]="months" [monthValue]="monthIndex"></app-calandar>
+  </div>
+
+</div>

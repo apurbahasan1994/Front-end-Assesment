@@ -1,0 +1,47 @@
+:host{
+
+  ::ng-deep .example-full-width .mat-form-field-infix{
+    font-size: 1.4rem;
+  }
+  ::ng-deep .example-full-width .mat-error{
+    font-size: 1.2rem;
+  }
+}
+.label {
+  font-size: 3rem;
+}
+
+.modal__body {
+  padding: 40px 0px  15px 0px;
+}
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  flex: 100;
+  margin-bottom: 1.5rem;
+}
+.width-3 {
+  width: 32%;
+}
+
+.input__row {
+  display: flex;
+  gap: 20px;
+}
+
+.modal__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+}
+@media(max-width:500px){
+  .date__inputs{
+    flex-direction: column;
+    gap: 0px;
+  }
+}

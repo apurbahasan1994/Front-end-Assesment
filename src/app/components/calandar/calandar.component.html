@@ -1,0 +1,43 @@
+<div class="calander__conatainer">
+  <table class='calendar-table' *ngIf="calendar">
+    <thead>
+      <tr>
+        <th>Monday</th>
+        <th>Tuesday</th>
+        <th>Wednesday</th>
+        <th>Thursday</th>
+        <th>Friday</th>
+        <th>Saturday</th>
+        <th>Sunday</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of calendar | chunk: 7; let i = index">
+        <td class="calendar-day" [ngClass]="{'past-date': c.isPastDate, 'today': c.isToday}"
+          *ngFor="let c of row; let j = index">
+          <div>
+            <div class="calendar-day-header" [ngClass]="{'blue-date': c.isToday}"><strong>{{c.date.getDate()}}</strong>
+              <strong *ngIf="c.isToday || (i==0 && j==0) || (c.date.getDate() == 1)">
+                {{monthNames[c.date.getMonth()]}}</strong>
+            </div>
+            <div>
+
+              <ul class="appoinment__list">
+
+                <li *ngFor="let appoinment of c.appointMents|customSort;let k=index">
+                  <button style="cursor:pointer;text-overflow: ellipsis;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    max-width: 9rem; ;" color="accent" color="primary"
+                    (click)="openAppoinmentModal(appoinment,((7*i)+j))">Appointment {{k}}</button>
+                </li>
+
+              </ul>
+
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
