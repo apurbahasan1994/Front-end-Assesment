@@ -1,0 +1,11 @@
+.main-content{
+  max-width: 1200px;
+  margin: 0px auto;
+  top: 50%;
+  transform: translate(0%,20%);
+}
+@media(max-width:1200px){
+  .main-content{
+    max-width: 80%;
+  }
+}
