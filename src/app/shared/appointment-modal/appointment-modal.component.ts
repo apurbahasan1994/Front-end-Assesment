@@ -112,6 +112,7 @@ export class AppointmentModalComponent implements OnInit {
     if (!(/^-?([1-9]\d*)?$/.test(this.appoinmentForm.value.ageFormControl))) {
       this.control.ageFormControl.setErrors('pattern', true);
       this.hasNumberError = true;
+      this.appoinmentForm.markAllAsTouched();
       return;
     }
     if (this.appoinmentForm.valid) {

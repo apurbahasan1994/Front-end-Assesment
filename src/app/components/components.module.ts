@@ -7,6 +7,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import {MatIconModule} from '@angular/material/icon'
+import {MatSnackBarModule} from '@angular/material/snack-bar'
 @NgModule({
   declarations: [
     CalandarComponent,
@@ -19,7 +20,8 @@ import {MatIconModule} from '@angular/material/icon'
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
-    MatIconModule
+    MatIconModule,
+    MatSnackBarModule
   ]
 })
 export class ComponentsModule { }

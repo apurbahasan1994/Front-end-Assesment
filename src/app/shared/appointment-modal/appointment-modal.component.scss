@@ -44,4 +44,13 @@
     flex-direction: column;
     gap: 0px;
   }
+  .modal__body{
+    max-height:50vh;
+    overflow-y: scroll;
+
+  }
+  .input__row {
+    display: flex;
+    margin-bottom: 10px;
+  }
 }
